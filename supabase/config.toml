@@ -1,7 +1,1 @@
 project_id = "jtuisnshyhlymzigpkrx"
-
-[functions.chat]
-verify_jwt = false
-
-[functions.send-transaction-email]
-verify_jwt = false
