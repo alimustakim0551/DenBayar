@@ -43,8 +43,8 @@ export default function TransactionManagement() {
                   <Badge variant={tx.status === 'approved' ? 'default' : tx.status === 'rejected' ? 'destructive' : 'secondary'}>{tx.status}</Badge>
                   {tx.status === 'pending' && (
                     <>
-                      <Button size="sm" onClick={() => updateStatus(tx.id, 'approved', tx)}><Check className="h-4 w-4" /></Button>
-                      <Button size="sm" variant="destructive" onClick={() => updateStatus(tx.id, 'rejected', tx)}><X className="h-4 w-4" /></Button>
+                      <Button size="sm" onClick={() => updateStatus(tx.id, 'approved')}><Check className="h-4 w-4" /></Button>
+                      <Button size="sm" variant="destructive" onClick={() => updateStatus(tx.id, 'rejected')}><X className="h-4 w-4" /></Button>
                     </>
                   )}
                 </div>
