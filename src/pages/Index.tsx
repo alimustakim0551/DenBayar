@@ -204,8 +204,8 @@ export default function Index() {
             className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6">
             
             <span className="block text-white glow-text-purple text-7xl font-mono">Your Trusted</span>
-            <span className="block gradient-text text-6xl md:text-8xl lg:text-9xl">Fund Management</span>
-            <span className="block gradient-text-gold">Community</span>
+            <span className="block gradient-text md:text-8xl lg:text-9xl text-7xl">Fund Management</span>
+            <span className="block gradient-text-gold text-7xl">Community</span>
           </motion.h1>
 
           <motion.p
