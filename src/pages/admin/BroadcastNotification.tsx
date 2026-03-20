@@ -32,16 +32,29 @@ export default function BroadcastNotification() {
 
   return (
     <MainLayout>
-      <Card className="max-w-md mx-auto">
+      <Card className="max-w-md mx-auto glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Radio className="h-5 w-5" />Broadcast Notification</CardTitle>
-          <CardDescription>Send notification to all approved users</CardDescription>
+          <CardTitle className="flex items-center gap-2 text-white">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+              <Radio className="h-5 w-5 text-white" />
+            </div>
+            Broadcast Notification
+          </CardTitle>
+          <CardDescription className="text-white/50">Send notification to all approved users</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
-            <div className="space-y-2"><Label htmlFor="title">Title</Label><Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required /></div>
-            <div className="space-y-2"><Label htmlFor="message">Message</Label><Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} rows={4} required /></div>
-            <Button type="submit" className="w-full" disabled={loading}>{loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Send Broadcast</Button>
+            <div className="space-y-2">
+              <Label htmlFor="title" className="text-white/70">Title</Label>
+              <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message" className="text-white/70">Message</Label>
+              <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} rows={4} required className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50" />
+            </div>
+            <Button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white border-0" disabled={loading}>
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Send Broadcast
+            </Button>
           </CardContent>
         </form>
       </Card>

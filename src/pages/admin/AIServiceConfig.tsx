@@ -33,18 +33,23 @@ export default function AIServiceConfig() {
 
   return (
     <MainLayout>
-      <Card className="max-w-md mx-auto">
+      <Card className="max-w-md mx-auto glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Bot className="h-5 w-5" />AI Service Config</CardTitle>
-          <CardDescription>Configure OpenRouter API key for AI chatbot</CardDescription>
+          <CardTitle className="flex items-center gap-2 text-white">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+              <Bot className="h-5 w-5 text-white" />
+            </div>
+            AI Service Config
+          </CardTitle>
+          <CardDescription className="text-white/50">Configure OpenRouter API key for AI chatbot</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="apiKey">OpenRouter API Key</Label>
-              <Input id="apiKey" type="password" placeholder="sk-or-..." value={apiKey} onChange={(e) => setApiKey(e.target.value)} required />
+              <Label htmlFor="apiKey" className="text-white/70">OpenRouter API Key</Label>
+              <Input id="apiKey" type="password" placeholder="sk-or-..." value={apiKey} onChange={(e) => setApiKey(e.target.value)} required className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50" />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white border-0" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Apply Changes
             </Button>
           </CardContent>
