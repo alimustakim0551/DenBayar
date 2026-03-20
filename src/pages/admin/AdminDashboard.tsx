@@ -21,14 +21,28 @@ export default function AdminDashboard() {
     fetchStats()
   }, [])
 
+  const cards = [
+    { title: 'Total Users', icon: Users, value: stats.users, color: 'text-white' },
+    { title: 'Pending', icon: Clock, value: stats.pending, color: 'text-amber-400' },
+    { title: 'Total Deposits', icon: Wallet, value: `₹${stats.deposits}`, color: 'text-emerald-400' },
+    { title: 'Total Withdrawals', icon: FileText, value: `₹${stats.withdrawals}`, color: 'text-red-400' },
+  ]
+
   return (
     <MainLayout>
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6 text-white">Admin Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><CardTitle className="text-sm">Total Users</CardTitle><Users className="h-4 w-4" /></CardHeader><CardContent><div className="text-2xl font-bold">{stats.users}</div></CardContent></Card>
-        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><CardTitle className="text-sm">Pending</CardTitle><Clock className="h-4 w-4" /></CardHeader><CardContent><div className="text-2xl font-bold">{stats.pending}</div></CardContent></Card>
-        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><CardTitle className="text-sm">Total Deposits</CardTitle><Wallet className="h-4 w-4" /></CardHeader><CardContent><div className="text-2xl font-bold text-green-600">₹{stats.deposits}</div></CardContent></Card>
-        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><CardTitle className="text-sm">Total Withdrawals</CardTitle><FileText className="h-4 w-4" /></CardHeader><CardContent><div className="text-2xl font-bold text-red-600">₹{stats.withdrawals}</div></CardContent></Card>
+        {cards.map((c) => (
+          <Card key={c.title} className="glass border-white/10">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm text-white/70">{c.title}</CardTitle>
+              <c.icon className="h-4 w-4 text-white/40" />
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold ${c.color}`}>{c.value}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </MainLayout>
   )

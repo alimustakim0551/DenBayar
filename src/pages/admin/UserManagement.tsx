@@ -27,20 +27,29 @@ export default function UserManagement() {
 
   return (
     <MainLayout>
-      <Card>
-        <CardHeader><CardTitle className="flex items-center gap-2"><Users className="h-5 w-5" />User Management</CardTitle></CardHeader>
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-white">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+              <Users className="h-5 w-5 text-white" />
+            </div>
+            User Management
+          </CardTitle>
+        </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {users.map(u => (
-              <div key={u.id} className="flex items-center justify-between p-4 border rounded-lg">
+              <div key={u.id} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
                 <div>
-                  <p className="font-medium">{u.name}</p>
-                  <p className="text-sm text-muted-foreground">{u.user_id} • {u.phone}</p>
+                  <p className="font-medium text-white">{u.name}</p>
+                  <p className="text-sm text-white/40">{u.user_id} • {u.phone}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={u.approved ? 'default' : 'secondary'}>{u.approved ? 'Approved' : 'Pending'}</Badge>
-                  {!u.approved && <Button size="sm" onClick={() => updateApproval(u.id, true)}><Check className="h-4 w-4" /></Button>}
-                  {u.approved && <Button size="sm" variant="destructive" onClick={() => updateApproval(u.id, false)}><X className="h-4 w-4" /></Button>}
+                  <Badge className={u.approved ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}>
+                    {u.approved ? 'Approved' : 'Pending'}
+                  </Badge>
+                  {!u.approved && <Button size="sm" onClick={() => updateApproval(u.id, true)} className="bg-emerald-600 hover:bg-emerald-500 text-white border-0"><Check className="h-4 w-4" /></Button>}
+                  {u.approved && <Button size="sm" onClick={() => updateApproval(u.id, false)} className="bg-red-600 hover:bg-red-500 text-white border-0"><X className="h-4 w-4" /></Button>}
                 </div>
               </div>
             ))}
