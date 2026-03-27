@@ -5,23 +5,29 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Bot, Send, Loader2 } from 'lucide-react'
 import { ChatMessage } from '@/types'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function Chat() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const { session } = useAuth()
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return
+    if (!session?.access_token) {
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Please log in to use the AI assistant.' }])
+      return
+    }
     const userMsg: ChatMessage = { role: 'user', content: input }
     setMessages(prev => [...prev, userMsg])
     setInput('')
     setLoading(true)
 
     try {
-      const resp = await fetch(`https://jtuisnshyhlymzigpkrx.supabase.co/functions/v1/chat`, {
+      const resp = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dWlzbnNoeWhseW16aWdwa3J4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4ODY3NDEsImV4cCI6MjA2NDQ2Mjc0MX0.9eEpk453Ixgl69lyYp7l1lma0fTgP0O4M71aVnvXIEI` },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.access_token}` },
         body: JSON.stringify({ messages: [...messages, userMsg] }),
       })
 
